@@ -18,9 +18,7 @@ int main()
 
 	int newStudent;
 	int ForModify;
-	
-	//d는 주소록을 검색하는 메뉴에서 학번, 이름 중에 어떤것으로 검색하는지 선택받기 위한 변수 
-	int ForRemove=0;
+
 	int List_all=0;//텍스트파일의 총 리스트 수 
 	int AddListNum=0;//주소록을 추가하는 메뉴에서 추가될 때 마다 f값이 올라감
 	struct list data[1000];
@@ -33,8 +31,7 @@ int main()
 		printf("2.학생정보 검색\n");
 		printf("3.학생정보 추가\n");
 		printf("4.학생정보 수정\n");
-		printf("5.학생정보 삭제\n");
-		printf("6.종료\n");
+		printf("5.종료\n");
 
 		scanf("%d",&menu_number);
 		switch(menu_number)
@@ -109,33 +106,7 @@ int main()
 			}
 			fclose(list);
 			break;
-
 		case 5:
-
-			printf("삭제하실분 학번을 입력하세요");//TEST
-			scanf("%s",&str);
-			for(i=0;i<List_all;i++)
-			{
-				if(strncmp(data[i].id,str,7)==0)
-				{
-					for(ForRemove=i;ForRemove<=List_all;ForRemove++)
-					{
-						strcpy(data[ForRemove].id,data[ForRemove+1].id);
-						strcpy(data[ForRemove].name,data[ForRemove+1].name);
-						strcpy(data[ForRemove].department,data[ForRemove+1].department);
-						strcpy(data[ForRemove].PhoneNumber,data[ForRemove+1].PhoneNumber);
-					} //삭제하려는 리스트 뒤에 있는 리스트들을 앞으로 복사
-					List_all--;
-				}
-				list = fopen("테스트테스트파일.txt","w");
-				for(c=0;c<List_all;c++)
-				{
-					fprintf(list,"%-10s %-10s %-10s %-10s\n",data[c].id, data[c].name, data[c].department, data[c].PhoneNumber);
-				}
-				fclose(list);
-			}
-			break;
-		case 6:
 			exit(0);
 			}
 			}
