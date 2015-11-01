@@ -2,7 +2,20 @@
 #include<stdlib.h>
 #include<string.h>//1
 
+<<<<<<< HEAD
 struct list{
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+struct list//hotfix
+=======
+struct list//hotfix2
+>>>>>>> hotfix
+{
+=======
+struct list{//iss53 branch
+>>>>>>> iss53
+>>>>>>> 82f851f2f4d35b213c4691512c71fbaa3f4fd270
 	char id[20];
 	char name[20];
 	char department[30];
@@ -29,6 +42,7 @@ void StudentDelete();
 
 int main()
 {
+<<<<<<< HEAD
 
 	while(1){
 		printf("\n1.List View\n");
@@ -40,6 +54,42 @@ int main()
 		printf("Input Number : ");
 		scanf("%d",&Menu_Number);
 
+=======
+
+<<<<<<< HEAD
+	int newStudent;
+	int ForModify;
+
+	int List_all=0;//텍스트파일의 총 리스트 수 
+	int AddListNum=0;//주소록을 추가하는 메뉴에서 추가될 때 마다 f값이 올라감
+	struct list data[1000];
+	char str[10];
+	FILE *list;
+
+	while(1)
+	{
+		printf("1.학생정보 보기\n");
+		printf("2.학생정보 검색\n");
+		printf("3.학생정보 추가\n");
+		printf("4.학생정보 수정\n");
+		printf("5.종료\n");
+
+		scanf("%d",&menu_number);
+		switch(menu_number)
+		{
+=======
+	while(1){
+		printf("\n1.List View\n");
+		printf("2.Student Search\n");
+		printf("3.Student Add\n");
+		printf("4.Student Update\n");
+		printf("5.Student Delete\n");
+		printf("6.End\n\n");
+		printf("Input Number : ");
+		scanf("%d",&Menu_Number);
+>>>>>>> iss53
+
+>>>>>>> 82f851f2f4d35b213c4691512c71fbaa3f4fd270
 		switch(Menu_Number)
 		{
 		case 1:
@@ -55,9 +105,18 @@ int main()
 			StudentUpdate();
 			break;
 		case 5:
+<<<<<<< HEAD
 			StudentDelete();
 			break;
 		case 6:
+=======
+<<<<<<< HEAD
+=======
+			StudentDelete();
+			break;
+		case 6:
+>>>>>>> iss53
+>>>>>>> 82f851f2f4d35b213c4691512c71fbaa3f4fd270
 			exit(0);
 		}
 	}
@@ -121,6 +180,7 @@ void StudentUpdate(void){
 	for(i=0;i<List_all;i++){
 		if(strncmp(data[i].id,str,7)==0){	
 			ForModify=i;
+<<<<<<< HEAD
 			printf("Phone Number : ");	
 			scanf("%s",&data[ForModify].PhoneNumber);
 			printf("Successfully done!\n");	
@@ -150,6 +210,38 @@ void StudentDelete(void){
 			List_all--;
 		}
 		list = fopen("Infromation of a student.txt","w");
+=======
+		}
+	}
+
+	printf("Phone Number : ");	
+	scanf("%s",&data[ForModify].PhoneNumber);
+	printf("Successfully done!\n");	
+
+	list=fopen("Infromation of a student.txt","w");
+	for(c=0;c<List_all;c++){
+		fprintf(list,"%-10s %-10s %-10s %-10s\n",data[c].id, data[c].name, data[c].department, data[c].PhoneNumber);
+	}	
+	fclose(list);
+}
+
+void StudentDelete(void){
+	printf("Input ID : ");
+	scanf("%s",&str);
+			
+	for(i=0;i<List_all;i++){		
+		if(strncmp(data[i].id,str,7)==0){		
+			for(ForRemove=i;ForRemove<=List_all;ForRemove++){	
+				strcpy(data[ForRemove].id,data[ForRemove+1].id);
+				strcpy(data[ForRemove].name,data[ForRemove+1].name);
+				strcpy(data[ForRemove].department,data[ForRemove+1].department);
+				strcpy(data[ForRemove].PhoneNumber,data[ForRemove+1].PhoneNumber);
+			}
+			List_all--;
+		}
+		list = fopen("Infromation of a student.txt","w");
+
+>>>>>>> 82f851f2f4d35b213c4691512c71fbaa3f4fd270
 		for(c=0;c<List_all;c++){		
 			fprintf(list,"%-10s %-10s %-10s %-10s\n",data[c].id, data[c].name, data[c].department, data[c].PhoneNumber);	
 		}	
