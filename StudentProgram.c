@@ -26,8 +26,9 @@ int main()
 	while(1)
 	{
 		printf("1.학생정보 보기\n");
-		printf("2.학생정보 추가\n");
-		printf("3.종료\n");
+		printf("2.학생정보 검색\n");
+		printf("3.학생정보 추가\n");
+		printf("4.종료\n");
 
 		scanf("%d",&menu_number);
 		switch(menu_number)
@@ -52,6 +53,18 @@ int main()
 			break;
 
 		case 2:
+			list = fopen("테스트테스트파일.txt","r");
+			printf("학번을 입력하세요");
+			scanf("%s",str);
+			for(c=0;c<List_all;c++)
+				if(strncmp(data[c].id,str,6)==0)
+				{
+					printf("이름:%s\n학번:%s\n번호:%s\n주소:%s\n",data[c].id,data[c].name,data[c].department,data[c].PhoneNumber);	
+				}
+			
+			break;
+
+		case 3:
 			newStudent=List_all+AddListNum;
 			list = fopen("테스트테스트파일.txt","a+");
 			printf("학번:");
@@ -70,7 +83,7 @@ int main()
 			AddListNum++;
 			break;
 
-		case 3:
+		case 4:
 			exit(0);
 			}
 			}
