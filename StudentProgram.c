@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<string.h>
 
-struct list
+struct list//hotfix
 {
 	char id[20];
 	char name[20];
