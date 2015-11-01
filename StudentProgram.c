@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-//1
+
 struct list{
 	char id[20];
 	char name[20];
