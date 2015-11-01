@@ -70,7 +70,7 @@ int main()
 			AddListNum++;
 			break;
 
-		case 3:
+		case 3: // 추가추가
 			exit(0);
 			}
 			}
