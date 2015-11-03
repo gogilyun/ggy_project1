@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<string.h>
 #include "Student_dataTable.h"
-//24
+//4
 int c,i;
 int Menu_Number;
 int NewStudent;
