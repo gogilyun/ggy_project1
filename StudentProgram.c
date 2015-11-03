@@ -1,29 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-<<<<<<< HEAD
 #include "Student_dataTable.h"
-//2
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-//3
-struct list{
-=======
-//1
-struct list
-{
->>>>>>> iss53
-	char id[20];
-	char name[20];
-	char department[30];
-	char PhoneNumber[20];
-};
-
-<<<<<<< HEAD
->>>>>>> a96a07253c98cb91f41a78aa6025ab60d2ab8a38
-=======
->>>>>>> iss51
+//eunjung02
 int c,i;
 int Menu_Number;
 int NewStudent;
@@ -41,8 +20,6 @@ void StudentSearch();
 int StudentAdd();
 void StudentUpdate();
 void StudentDelete();
-=======
->>>>>>> iss53
 
 int main()
 {
