@@ -2,7 +2,11 @@
 #include<stdlib.h>
 #include<string.h>
 #include "Student_dataTable.h"
+<<<<<<< HEAD
 //4
+=======
+//45
+>>>>>>> hotfix
 int c,i;
 int Menu_Number;
 int NewStudent;
