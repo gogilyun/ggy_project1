@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<string.h>
 #include "Student_dataTable.h"
-
+//2
 int c,i;
 int Menu_Number;
 int NewStudent;
@@ -12,6 +12,7 @@ int List_all=0;
 int AddListNum=0;
 struct student StudentInfo[1000];
 char IdFromUser[20];
+
 
 FILE *list;
 
