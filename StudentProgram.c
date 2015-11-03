@@ -1,14 +1,7 @@
-//information of a student
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-
-struct list{
-	char id[20];
-	char name[20];
-	char department[30];
-	char PhoneNumber[20];
-};
+#include "Student_dataTable.h"
 
 int c,i;
 int Menu_Number;
@@ -17,19 +10,28 @@ int ForModify;
 int ForRemove=0;
 int List_all=0;
 int AddListNum=0;
-struct list data[1000];
-char str[10];
+struct student StudentInfo[1000];
+char IdFromUser[20];
 
 FILE *list;
 
 void ListView();
 void StudentSearch();
-void StudentAdd();
+int StudentAdd();
 void StudentUpdate();
 void StudentDelete();
 
 int main()
 {
+	list=fopen("Infromation of a student.txt","r");
+
+	for(List_all=0;;List_all++){
+		fscanf(list,"%s %s %s %s",&StudentInfo[List_all].id, &StudentInfo[List_all].name, &StudentInfo[List_all].department, &StudentInfo[List_all].PhoneNumber);
+		
+		if(feof(list)){	
+			break;
+		}
+	}
 
 	while(1){
 		printf("\n1.List View\n");
@@ -66,69 +68,75 @@ int main()
 }
 
 void ListView(void){
-	list=fopen("Infromation of a student.txt","r");
-
-	for(List_all=0;;List_all++){
-		fscanf(list,"%s %s %s %s",&data[List_all].id, &data[List_all].name, &data[List_all].department, &data[List_all].PhoneNumber);
-		
-		if(feof(list)){	
-			break;
-		}
-	}
+	
 	printf("------------------------------------------------\n");
-	printf("[ID/ NAME/DEPARTMENT/PHONENUMBER]\n");
+	printf("[ID/ NAME/ DEPARTMENT/ PHONENUMBER]\n");
 	printf("------------------------------------------------\n");
 	for(c=0;c<List_all;c++)		
-		printf("%-10s %-10s %-10s %-10s\n",data[c].id, data[c].name, data[c].department, data[c].PhoneNumber);	
+		printf("%-10s %-10s %-10s %-10s\n",StudentInfo[c].id, StudentInfo[c].name, StudentInfo[c].department, StudentInfo[c].PhoneNumber);	
 	fclose(list);
 }
 
 void StudentSearch(void){
 	list = fopen("Infromation of a student.txt","r");		
 	printf("Input ID : ");	
-	scanf("%s",str);
+	scanf("%s",IdFromUser);
 	
 	for(c=0;c<List_all;c++)	
-		if(strncmp(data[c].id,str,6)==0){		
-			printf("* ID:%s\n* Name:%s\n* Department:%s\n* PhoneNumber:%s\n",data[c].id,data[c].name,data[c].department,data[c].PhoneNumber);	
+		if(strncmp(StudentInfo[c].id,IdFromUser,7)==0){		
+			printf("* ID:%s\n* Name:%s\n* Department:%s\n* PhoneNumber:%s\n",StudentInfo[c].id,StudentInfo[c].name,StudentInfo[c].department,StudentInfo[c].PhoneNumber);	
 		}
 }
 
-void StudentAdd(void){
+int StudentAdd(void){
 	NewStudent=List_all+AddListNum;
 	list = fopen("Infromation of a student.txt","a+");
+	
+	printf("ID:");
+	scanf("%s",IdFromUser);
+	for(List_all=0;;List_all++){
+		fscanf(list,"%s %s %s %s",&StudentInfo[List_all].id, &StudentInfo[List_all].name, &StudentInfo[List_all].department, &StudentInfo[List_all].PhoneNumber);
+		
+		if(strncmp(StudentInfo[List_all].id,IdFromUser,7)==0){	
+			printf("It's duplicate student ID, please write other ID\n");
+			return 0;
+		}
+		if(feof(list))	
+			break;
+	}
+	strcpy(StudentInfo[NewStudent].id,IdFromUser);
 
-	printf("ID:");		
-	scanf("%s",data[NewStudent].id);	
 	printf("Name:");	
-	scanf("%s",data[NewStudent].name);
+	scanf("%s",StudentInfo[NewStudent].name);
 	printf("Department:");
-	scanf("%s",data[NewStudent].department);
+	scanf("%s",StudentInfo[NewStudent].department);
 	printf("PhoneNumber:");
-	scanf("%s",data[NewStudent].PhoneNumber);
-	gets(str);
+	scanf("%s",StudentInfo[NewStudent].PhoneNumber);
+	gets(IdFromUser);
 
-	fprintf(list,"%-10s %-10s %-10s %-10s\n",data[NewStudent].id, data[NewStudent].name, data[NewStudent].department, data[NewStudent].PhoneNumber);
+	fprintf(list,"%-10s %-10s %-10s %-10s\n",StudentInfo[NewStudent].id, StudentInfo[NewStudent].name, StudentInfo[NewStudent].department, StudentInfo[NewStudent].PhoneNumber);
 	printf("Successfully done!\n");
+	
 	
 	fclose(list);
 	AddListNum++;
+	return 0;
 }
 
 void StudentUpdate(void){
 	printf("Input ID : ");
-	scanf("%s",str);
+	scanf("%s",IdFromUser);
 
 	for(i=0;i<List_all;i++){
-		if(strncmp(data[i].id,str,7)==0){	
+		if(strncmp(StudentInfo[i].id,IdFromUser,7)==0){	
 			ForModify=i;
 			printf("Phone Number : ");	
-			scanf("%s",&data[ForModify].PhoneNumber);
+			scanf("%s",&StudentInfo[ForModify].PhoneNumber);
 			printf("Successfully done!\n");	
 			list=fopen("Infromation of a student.txt","w");
 
 			for(c=0;c<List_all;c++){
-				fprintf(list,"%-10s %-10s %-10s %-10s\n",data[c].id, data[c].name, data[c].department, data[c].PhoneNumber);
+				fprintf(list,"%-10s %-10s %-10s %-10s\n",StudentInfo[c].id, StudentInfo[c].name, StudentInfo[c].department, StudentInfo[c].PhoneNumber);
 			}
 		}	
 	}
@@ -138,21 +146,21 @@ void StudentUpdate(void){
 
 void StudentDelete(void){
 	printf("Input ID : ");
-	scanf("%s",&str);
+	scanf("%s",&IdFromUser);
 			
 	for(i=0;i<List_all;i++){		
-		if(strncmp(data[i].id,str,7)==0){		
+		if(strncmp(StudentInfo[i].id,IdFromUser,7)==0){		
 			for(ForRemove=i;ForRemove<=List_all;ForRemove++){	
-				strcpy(data[ForRemove].id,data[ForRemove+1].id);
-				strcpy(data[ForRemove].name,data[ForRemove+1].name);
-				strcpy(data[ForRemove].department,data[ForRemove+1].department);
-				strcpy(data[ForRemove].PhoneNumber,data[ForRemove+1].PhoneNumber);
-			}
+				strcpy(StudentInfo[ForRemove].id,StudentInfo[ForRemove+1].id);
+				strcpy(StudentInfo[ForRemove].name,StudentInfo[ForRemove+1].name);
+				strcpy(StudentInfo[ForRemove].department,StudentInfo[ForRemove+1].department);
+				strcpy(StudentInfo[ForRemove].PhoneNumber,StudentInfo[ForRemove+1].PhoneNumber);
+			} //지우고자 하는 학생의 리스트의 다음학생부터 한칸씩 앞으로 
 			List_all--;
 		}
 		list = fopen("Infromation of a student.txt","w");
 		for(c=0;c<List_all;c++){		
-			fprintf(list,"%-10s %-10s %-10s %-10s\n",data[c].id, data[c].name, data[c].department, data[c].PhoneNumber);	
+			fprintf(list,"%-10s %-10s %-10s %-10s\n",StudentInfo[c].id, StudentInfo[c].name, StudentInfo[c].department, StudentInfo[c].PhoneNumber);	
 		}	
 		fclose(list);
 	}
