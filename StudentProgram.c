@@ -4,6 +4,7 @@
 <<<<<<< HEAD
 #include "Student_dataTable.h"
 //2
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 //3
@@ -21,6 +22,8 @@ struct list
 
 <<<<<<< HEAD
 >>>>>>> a96a07253c98cb91f41a78aa6025ab60d2ab8a38
+=======
+>>>>>>> iss51
 int c,i;
 int Menu_Number;
 int NewStudent;
