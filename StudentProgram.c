@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-
+//1
 struct list
 {
 	char id[20];
@@ -9,6 +9,7 @@ struct list
 	char department[30];
 	char PhoneNumber[20];
 };
+
 
 int main()
 {
